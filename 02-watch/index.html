@@ -15,6 +15,13 @@
             padding: 0;
         }
 
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         body {
             display: flex;
             flex-direction: column;
@@ -25,12 +32,14 @@
             font-family: Arial, sans-serif;
             background-color: #242F3F;
             color: #f1f1f1;
+            font-size: 62.5%;
         }
 
         h1 {
             color: #efefef;
             text-align: center;
             margin-bottom: .5rem;
+            font-size: 2rem;
         }
 
         #container {
@@ -64,56 +73,79 @@
             padding: 0;
         }
 
-        #alert {
+        .space-box {
             width: 100%;
             max-width: 500px;
-            background-color: #FFC0CE;
-            border-radius: 16px;
-            padding: 1rem 1rem;
-            color: #94354A;
-            font-size: 1.2rem;
+            border-radius: 99px;
             text-align: center;
         }
 
+        .alert {
+            background-color: #FFC0CE;
+            color: #94354A;
+            font-size: 1rem;
+            padding: .5rem;
+
+        }
+
+        .notification {
+            background-color: #c0e5ff;
+            color: #355894;
+            font-size: 1rem;
+            padding: .5rem;
+
+        }
+
         #alarm {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
             background-color: #D4EADD;
-            border-radius: 16px;
-            padding: 1rem 1rem;
             color: #64A57B;
 
             form {
                 display: flex;
                 width: 100%;
-                gap: .3rem;
-            }
 
-            input {
-                flex: 0 0 20%;
-                max-width: 20%;
-                border: none;
-                padding: .5rem;
-                border-radius: 4px;
-                background: #f8fffb;
-                color: #4D7C5A;
-                text-align: center;
-            }
 
-            button {
-                flex: 1;
-                border: none;
-                padding: .5rem;
-                border-radius: 4px;
-                background-color: #64A57B;
-                color: #23372a;
-                cursor: pointer;
-                transition: background-color .1s, color .1s;
+                input {
+                    width: 20%;
+                    border: none;
+                    padding: 1rem;
+                    background: #f8fffb;
+                    color: #4D7C5A;
+                    text-align: center;
+                    font-size: 1rem;
+                    transition: all 500ms ease;
 
-                &:hover {
-                    background-color: #4D7C5A;
-                    color: #1c2e21;
+                    &:first-child {
+                        border-top-left-radius: 99px;
+                        border-bottom-left-radius: 99px;
+                    }
+
+                    &:last-child {
+                        border-top-right-radius: 99px;
+                        border-bottom-right-radius: 99px;
+                    }
+
+
+                    &:hover {
+                        background-color: #e1eae7;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                input[type="submit"] {
+                    flex-grow: 1;
+                    background-color: #64A57B;
+                    color: #f8fffb;
+                    cursor: pointer;
+                    transition: background-color .1s, color .1s;
+
+                    &:hover {
+                        background-color: #469b63;
+                        color: #f8fffb;
+                    }
                 }
             }
         }
@@ -123,9 +155,6 @@
 <body>
     <h1>SmartWatch⌚️ built in Vanilla JS</h1>
 
-    <div id="alert">
-        <p id="alert-text">Es la hora <span id="isTime">00:00:00</span></p>
-    </div>
 
     <section id="container">
         <div id="date" class="wrap">
@@ -144,12 +173,12 @@
         </div>
     </section>
 
-    <div id="alarm">
+    <div id="alarm" class="space-box">
         <form id="setAlarm">
-            <input type="number" id="setHour" min="00" max="23">
-            <input type="number" id="setMinute" min="00" max="59">
-            <input type="number" id="setSecond" min="00" max="59">
-            <button type="submit">Set Alarm</button>
+            <input type="number" id="setHour">
+            <input type="number" id="setMinute" >
+            <input type="number" id="setSecond" >
+            <input type="submit" value="Set Alarms">
         </form>
 
     </div>

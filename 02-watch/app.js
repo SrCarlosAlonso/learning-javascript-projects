@@ -31,6 +31,10 @@ const setHour = $('#setHour');
 const setMinute = $('#setMinute');
 const setSecond = $('#setSecond');
 
+const formSetTimer = $('#setAlarm');
+
+const headingH1 = $('h1');
+
 // Asignamos la fecha
 function setDate(date) {
     day.innerText = date.getDate();
@@ -51,13 +55,62 @@ function updateClock() {
     seconds.innerText = currentSeconds;
 };
 
-//  Setear inputs del temporizador
+//  Inicializar el temporizador
 function initialTimer(date) {
+    // Asignamos la hora actual a los inputs
     setHour.value = date.getHours();
     setMinute.value = date.getMinutes();
     setSecond.value = date.getSeconds();
+    // Restringir la cantidad de caracteres en los inputs
+    setHour.addEventListener('input', onlyTwoDigits);
+    setMinute.addEventListener('input', onlyTwoDigits);
+    setSecond.addEventListener('input', onlyTwoDigits);
 }
 
-// Preventdefault al boton y cuando hagamos clic se ejecuta una funcion que guarda esos valores en una variable.
+// Validar el formulario del temporizador
+formSetTimer.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (setHour.value < 0 || setHour.value > 23 || setMinute.value < 0 || setMinute.value > 59 || setSecond.value < 0 || setSecond.value > 59) {
+        notification('Por favor, ingrese una hora válida', true);
+        return;
+    }
+    console.log('Formulario enviado');
+});
+
+
 // Cuando la hora actual sea igual a la hora del temporizador, se va a mostrar una alerta.
 // Cada vez que se actualia la hora se tiene que comprar con la hora del temporizador.
+
+
+// Fuctiones helpers
+
+// Notificaciones
+function notification(message, isAlert) {
+    const alert = $('#alert');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('space-box');
+    messageDiv.textContent = message;
+    headingH1.insertAdjacentElement('afterend', messageDiv);
+
+    if (isAlert) {
+        messageDiv.classList.add('alert');
+
+    } else {
+        messageDiv.classList.add('notification');
+
+    }
+
+    if (alert) {
+        alert.remove();
+    }
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 3000);
+}
+
+// Solo 2 digitos en los inputs
+function onlyTwoDigits(e) {
+    if (e.target.value.length > 2) {
+        e.target.value = e.target.value.slice(0, 2);
+    }
+}
