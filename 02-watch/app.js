@@ -1,4 +1,5 @@
 console.log('Hello, World!');
+
 //Alias
 const $ = selector => document.querySelector(selector);
 const $$ = selector => document.querySelectorAll(selector);
@@ -68,13 +69,25 @@ function initialTimer(date) {
 }
 
 // Validar el formulario del temporizador
+let allTimers = [];
+
 formSetTimer.addEventListener('submit', (e) => {
     e.preventDefault();
     if (setHour.value < 0 || setHour.value > 23 || setMinute.value < 0 || setMinute.value > 59 || setSecond.value < 0 || setSecond.value > 59) {
         notification('Por favor, ingrese una hora válida', true);
         return;
     }
-    console.log('Formulario enviado');
+
+    const timer = {
+        hour: setHour.value,
+        minute: setMinute.value,
+        second: setSecond.value
+    }
+    allTimers.push(timer);
+
+    saveTimer(allTimers);
+
+    notification('Temporizador guardado', false);
 });
 
 
@@ -94,9 +107,11 @@ function notification(message, isAlert) {
 
     if (isAlert) {
         messageDiv.classList.add('alert');
+        messageDiv.id = 'alert';
 
     } else {
         messageDiv.classList.add('notification');
+        messageDiv.id = 'alert';
 
     }
 
@@ -113,4 +128,29 @@ function onlyTwoDigits(e) {
     if (e.target.value.length > 2) {
         e.target.value = e.target.value.slice(0, 2);
     }
+}
+
+// Save timer
+function saveTimer(timer) {
+    const resumeTimer = $('.resume-list')
+    resumeTimer.innerHTML = '';
+
+    timer.forEach((timer, index) => {
+        // tengo que borrar el contenido antes de mostrar los nuevos elementos
+
+        const { hour, minute, second } = timer;
+        const timerId = `id-${index + 1}`;
+
+        const timerLi = document.createElement('li');
+        timerLi.classList.add('resume-alarm');
+        timerLi.id = timerId;
+        timerLi.innerHTML = `
+                <p>Alarma ${index + 1}</p>
+                <span>${hour}:${minute}:${second}</span>
+                <button id:"borrar">X</button>
+            `;
+        resumeTimer.appendChild(timerLi);
+    });
+
+    console.log(resumeTimer);
 }
