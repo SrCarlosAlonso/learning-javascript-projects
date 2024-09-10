@@ -86,70 +86,74 @@ formSetTimer.addEventListener('submit', (e) => {
     allTimers.push(timer);
 
     saveTimer(allTimers);
-
-    notification('Temporizador guardado', false);
 });
 
+// Mostrar los temporizadores guardados
 
-// Cuando la hora actual sea igual a la hora del temporizador, se va a mostrar una alerta.
-// Cada vez que se actualia la hora se tiene que comprar con la hora del temporizador.
+function saveTimer(timer) {
+    const resumeTimer = $('.resume-list')
+    let idTimer = []
+    resumeTimer.innerHTML = '';
 
+    timer.forEach((timer, index) => {
+        const { hour, minute, second } = timer;
+        const timerId = `id-${hour}${minute}${second}`;
 
-// Fuctiones helpers
+        // Verifica si ya existe el mismo ID en el array idTimer
+        if (idTimer.some(id => id === timerId)) {
+            console.log('Ya existe un timer con la misma hora');
+            notification('Ya existe un timer con la misma hora', true);
+            return;
+        } else {
+            const timerLi = document.createElement('li');
+            timerLi.classList.add('resume-alarm');
+            timerLi.id = timerId;
+            timerLi.innerHTML = `
+                    <p>Alarma ${index + 1}</p>
+                    <span>${hour}:${minute}:${second}</span>
+                    <button id:"borrar">X</button>
+                `;
+            resumeTimer.appendChild(timerLi);
+            idTimer.push(timerId);
+            notification('Temporizador guardado', false);
 
-// Notificaciones
+        }
+
+    });
+}
+
+// -- Fuctiones helpers -- //
+// Mostrar Notificaciones
 function notification(message, isAlert) {
-    const alert = $('#alert');
+    // Buscar y eliminar cualquier notificación existente antes de crear una nueva
+    const existingAlert = document.querySelector('#alert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+
+    // Crear el nuevo elemento de mensaje
     const messageDiv = document.createElement('div');
+    messageDiv.id = 'alert';
     messageDiv.classList.add('space-box');
     messageDiv.textContent = message;
+
+    const headingH1 = document.querySelector('h1');
     headingH1.insertAdjacentElement('afterend', messageDiv);
+
 
     if (isAlert) {
         messageDiv.classList.add('alert');
-        messageDiv.id = 'alert';
-
     } else {
         messageDiv.classList.add('notification');
-        messageDiv.id = 'alert';
-
     }
 
-    if (alert) {
-        alert.remove();
-    }
     setTimeout(() => {
         messageDiv.remove();
     }, 3000);
 }
-
 // Solo 2 digitos en los inputs
 function onlyTwoDigits(e) {
     if (e.target.value.length > 2) {
         e.target.value = e.target.value.slice(0, 2);
     }
-}
-
-// Save timer
-function saveTimer(timer) {
-    const resumeTimer = $('.resume-list')
-
-    resumeTimer.innerHTML = '';
-
-    timer.forEach((timer, index) => {
-        const { hour, minute, second } = timer;
-        const timerId = `id-${index + 1}`;
-
-        const timerLi = document.createElement('li');
-        timerLi.classList.add('resume-alarm');
-        timerLi.id = timerId;
-        timerLi.innerHTML = `
-                <p>Alarma ${index + 1}</p>
-                <span>${hour}:${minute}:${second}</span>
-                <button id:"borrar">X</button>
-            `;
-        resumeTimer.appendChild(timerLi);
-    });
-
-    console.log(resumeTimer);
 }
