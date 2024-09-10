@@ -6,154 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 2 | Smart Watch</title>
     <script src="app.js" type="module"></script>
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Chrome, Safari, Edge, Opera */
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #242F3F;
-            color: #f1f1f1;
-            font-size: 62.5%;
-        }
-
-        h1 {
-            color: #efefef;
-            text-align: center;
-            margin-bottom: .5rem;
-            font-size: 2rem;
-        }
-
-        #container {
-            width: 100%;
-            max-width: 500px;
-            background: #2A3545;
-            padding: 1rem 2rem;
-            border-radius: 16px;
-            margin: .8rem 0;
-        }
-
-        .wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: .5rem 0;
-
-            .space {
-                margin: 0 0.2rem;
-                opacity: 0.5;
-            }
-        }
-
-        #date {
-            font-size: 1.2rem;
-            padding: 0;
-        }
-
-        #time {
-            font-size: 4rem;
-            padding: 0;
-        }
-
-        .space-box {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 99px;
-            text-align: center;
-        }
-
-        .alert {
-            background-color: #FFC0CE;
-            color: #94354A;
-            font-size: 1rem;
-            padding: .5rem;
-
-        }
-
-        .notification {
-            background-color: #c0e5ff;
-            color: #355894;
-            font-size: 1rem;
-            padding: .5rem;
-
-        }
-
-        #alarm {
-            background-color: #D4EADD;
-            color: #64A57B;
-
-            form {
-                display: flex;
-                width: 100%;
-
-
-                input {
-                    width: 20%;
-                    border: none;
-                    padding: 1rem;
-                    background: #f8fffb;
-                    color: #4D7C5A;
-                    text-align: center;
-                    font-size: 1rem;
-                    transition: all 500ms ease;
-
-                    &:first-child {
-                        border-top-left-radius: 99px;
-                        border-bottom-left-radius: 99px;
-                    }
-
-                    &:last-child {
-                        border-top-right-radius: 99px;
-                        border-bottom-right-radius: 99px;
-                    }
-
-
-                    &:hover {
-                        background-color: #e1eae7;
-                    }
-
-                    &:focus {
-                        outline: none;
-                    }
-                }
-
-                input[type="submit"] {
-                    flex-grow: 1;
-                    background-color: #64A57B;
-                    color: #f8fffb;
-                    cursor: pointer;
-                    transition: background-color .1s, color .1s;
-
-                    &:hover {
-                        background-color: #469b63;
-                        color: #f8fffb;
-                    }
-                }
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>SmartWatch⌚️ built in Vanilla JS</h1>
+    <h1>SmartWatch ⌚️ built in Vanilla JS</h1>
 
 
     <section id="container">
@@ -176,11 +33,22 @@
     <div id="alarm" class="space-box">
         <form id="setAlarm">
             <input type="number" id="setHour">
-            <input type="number" id="setMinute" >
-            <input type="number" id="setSecond" >
+            <input type="number" id="setMinute">
+            <input type="number" id="setSecond">
             <input type="submit" value="Set Alarms">
         </form>
 
+    </div>
+
+    <div id="resume-timers">
+        <h2>Alarms saved </h2>
+        <ul class="resume-list">
+            <li class="resume-alarm">
+                <p>Nigun temporizador aun. </p>
+            </li>
+            
+            </li>
+        </ul>
     </div>
 </body>
 
