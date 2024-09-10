@@ -133,11 +133,10 @@ function onlyTwoDigits(e) {
 // Save timer
 function saveTimer(timer) {
     const resumeTimer = $('.resume-list')
+
     resumeTimer.innerHTML = '';
 
     timer.forEach((timer, index) => {
-        // tengo que borrar el contenido antes de mostrar los nuevos elementos
-
         const { hour, minute, second } = timer;
         const timerId = `id-${index + 1}`;
 
