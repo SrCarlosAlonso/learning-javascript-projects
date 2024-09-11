@@ -92,6 +92,10 @@ formSetTimer.addEventListener('submit', (e) => {
     } else {
         allTimers.push(timer);
         saveTimer(allTimers);
+
+        // Limpiar los inputs
+        const newSetDate = new Date();
+        initialTimer( newSetDate );
     }
 
 });
