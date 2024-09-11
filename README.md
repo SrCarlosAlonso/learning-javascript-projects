@@ -2,6 +2,7 @@
 
 1. Calculadora [Link](01-calculator)
 2. Watch [Link](02-watch)
+3. Blog API [Link](03-blog-API)
 
 ## Ideas de proyectos
 Ideas de proyectos basicos para practicar y mejorar habilidades de javascript.
