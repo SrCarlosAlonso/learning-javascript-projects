@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog API with jsonplaceholder</title>
+    <script src="/app.js" type="module"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="dark:bg-slate-800 dark:text-white font-mono">
+    <main class="max-w-screen-xl mx-auto p-4 text-center flex flex-col items-center gap-2 py-10">
+        <h1 class="text-3xl max-w-screen-md text-cyan-300 font-bold border-b border-cyan-900 pb-5">Hi!👋🏻 this
+            is my Blog, using the API of jsonplaceholder</h1>
+        <h4 class=" font-light p-4">for more info visit:
+            <a href="https://jsonplaceholder.typicode.com/guide/"
+                class=" font-bold border p-2 rounded-md border-cyan-300 text-cyan-300 hover:bg-cyan-300 hover:text-black transition-all ease-linear duration-300"
+                rel="nofollow" title="Guide jsonplaceholder">
+                jsonplaceholder
+            </a>
+        </h4>
+        <section class="container text-left">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-100" </h2> Posts</h2>
+            <ul id="posts" class="content">
+                <!-- Here will be the posts -->
+                <li class="border-l-2 pl-4 mb-4 border-cyan-900">
+                    <h3 class="text-xl font-semibold">Post title</h3>
+                    <p>Post resume. </p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
