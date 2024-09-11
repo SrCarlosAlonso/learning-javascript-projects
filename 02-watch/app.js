@@ -46,6 +46,7 @@ function setDate(date) {
 // Actualizar el reloj
 function updateClock() {
     const curentDate = new Date();
+    isTimeToAlarm(curentDate);
 
     const currentHours = curentDate.getHours();
     const currentMinutes = curentDate.getMinutes();
@@ -187,4 +188,16 @@ function deleteTimer(e) {
         noTemporizer.innerHTML = '<p>No hay temporizadores</p>';
         resumeTimer.appendChild(noTemporizer);
     }
+}
+// Verificar si es hora de la alarma
+function isTimeToAlarm(currentDate) {
+    console.log(currentDate);
+    const curentId = `id-${currentDate.getHours()}${currentDate.getMinutes()}${currentDate.getSeconds()}`;
+
+    allTimers.forEach((timer) => {
+        const { id, name, hour, minute, second } = timer;
+        if (id === curentId) {
+            alert(`¡${name}! es hora de despertar`);
+        }
+    });
 }
