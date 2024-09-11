@@ -78,46 +78,57 @@ formSetTimer.addEventListener('submit', (e) => {
         return;
     }
 
+    const nameTimer = window.prompt("Nombre del temporizador", "Alarma");
     const timer = {
+        id: `id-${setHour.value}${setMinute.value}${setSecond.value}`,
+        name: nameTimer,
         hour: setHour.value,
         minute: setMinute.value,
         second: setSecond.value
     }
-    allTimers.push(timer);
+    if (allTimers.some((timer) => timer.id === `id-${setHour.value}${setMinute.value}${setSecond.value}`)) {
+        notification('El temporizador ya existe', true);
+        return;
+    } else {
+        allTimers.push(timer);
+        saveTimer(allTimers);
+    }
 
-    saveTimer(allTimers);
 });
 
 // Mostrar los temporizadores guardados
-
 function saveTimer(timer) {
     const resumeTimer = $('.resume-list')
-    let idTimer = []
     resumeTimer.innerHTML = '';
 
-    timer.forEach((timer, index) => {
-        const { hour, minute, second } = timer;
-        const timerId = `id-${hour}${minute}${second}`;
+    timer.forEach((timer) => {
+        const { id, name, hour, minute, second } = timer;
+        const timerLi = document.createElement('li');
+        timerLi.classList.add('resume-alarm');
+        timerLi.id = id;
 
-        // Verifica si ya existe el mismo ID en el array idTimer
-        if (idTimer.some(id => id === timerId)) {
-            console.log('Ya existe un timer con la misma hora');
-            notification('Ya existe un timer con la misma hora', true);
-            return;
-        } else {
-            const timerLi = document.createElement('li');
-            timerLi.classList.add('resume-alarm');
-            timerLi.id = timerId;
-            timerLi.innerHTML = `
-                    <p>Alarma ${index + 1}</p>
-                    <span>${hour}:${minute}:${second}</span>
-                    <button id:"borrar">X</button>
-                `;
-            resumeTimer.appendChild(timerLi);
-            idTimer.push(timerId);
-            notification('Temporizador guardado', false);
+        const timerName = document.createElement('p');
+        timerName.textContent = name;
 
-        }
+        const timerSpan = document.createElement('span');
+        timerSpan.textContent = `${hour}:${minute}:${second}`;
+
+        // Boton de borrar
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete');
+        deleteButton.textContent = 'X';
+        deleteButton.onclick = deleteTimer;
+
+        // Agregar elementos al DOM
+        timerLi.appendChild(timerName);
+        timerLi.appendChild(timerSpan);
+        timerLi.appendChild(deleteButton);
+
+        // Agregar el temporizador a la lista
+        resumeTimer.appendChild(timerLi);
+
+        // idTimer.push(timerId);
+        notification('Temporizador guardado', false);
 
     });
 }
@@ -155,5 +166,21 @@ function notification(message, isAlert) {
 function onlyTwoDigits(e) {
     if (e.target.value.length > 2) {
         e.target.value = e.target.value.slice(0, 2);
+    }
+}
+// Borrar alarma
+function deleteTimer(e) {
+    const resumeTimer = $('.resume-list')
+    const timerId = e.target.parentElement.id;
+
+    allTimers = allTimers.filter((timer) => timer.id !== timerId);
+    saveTimer(allTimers);
+    notification('Temporizador eliminado', false);
+
+    if (allTimers.length === 0) {
+        const noTemporizer = document.createElement('li');
+        noTemporizer.classList.add('resume-alarm');
+        noTemporizer.innerHTML = '<p>No hay temporizadores</p>';
+        resumeTimer.appendChild(noTemporizer);
     }
 }
