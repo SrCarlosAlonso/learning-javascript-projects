@@ -5,8 +5,20 @@ const formTask = document.getElementById("form-task");
 const inputTask = document.getElementById("input-task");
 const btnSend = document.getElementById("btn-send");
 
+const countAll = document.getElementById('count-all');
+const countPending = document.getElementById('count-pending');
+const countCompleted = document.getElementById('count-completed');
+
 // Object taks empty
 const tasksObject = [];
+
+window.addEventListener('load', () => {
+    let tasksLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+    if (tasksLocal.length > 0) {
+        tasksObject.push(...tasksLocal);
+        return renderTasks(tasksObject);
+    }
+});
 
 // Event Listeners
 formTask.addEventListener('submit', (e) => {
@@ -43,6 +55,7 @@ const createTask = (task) => {
         showAlerte('success', 'Task added');
     }
     renderTasks(tasksObject);
+    toLocalStorage(tasksObject);
 }
 
 
@@ -61,7 +74,14 @@ function renderTasks(tasksObject) {
         const img = document.createElement('img');
         img.classList.add('icon');
         img.dataset.id = id;
-        img.src = '/public/icon-pending.svg';
+        // Change icon if task is completed
+        if (task.completed) {
+            img.src = '/public/icon-si-check.svg';
+            li.classList.add('completed');
+        } else {
+            img.src = '/public/icon-pending.svg';
+            li.classList.remove('completed');
+        }
         img.onclick = () => { completedTask(task) };
 
         const p = document.createElement('p');
@@ -97,7 +117,7 @@ function renderTasks(tasksObject) {
     });
 }
 
-// Fucionalitys
+// Basic functions
 function completedTask(task) {
     let { id, completed } = task;
     const iconCheck = document.querySelector(`[data-id="${id}"]`);
@@ -107,11 +127,22 @@ function completedTask(task) {
     if (task.completed) {
         iconCheck.src = '/public/icon-si-check.svg';
         textTask.classList.add('title-completed');
+
+        // Si la task es completada tenemos que actulizar el objeto en local storage
+        const index = tasksObject.findIndex((task) => task.id === id);
+        tasksObject[index].completed = true;
+        toLocalStorage(tasksObject);
+        renderTasks(tasksObject);
+
     } else {
         iconCheck.src = '/public/icon-pending.svg';
         textTask.classList.remove('title-completed');
-    }
 
+        const index = tasksObject.findIndex((task) => task.id === id);
+        tasksObject[index].completed = false;
+        toLocalStorage(tasksObject);
+        renderTasks(tasksObject);
+    }
 }
 let taskEditID = null;
 
@@ -119,6 +150,7 @@ function editTask(task) {
     console.log('Edit task', task);
     inputTask.value = task.title;
     taskEditID = task.id;
+
 }
 
 function deleteTask(task) {
@@ -127,7 +159,26 @@ function deleteTask(task) {
     const index = tasksObject.findIndex((task) => task.id === id);
     tasksObject.splice(index, 1);
     renderTasks(tasksObject);
+    toLocalStorage(tasksObject);
     showAlerte('success', 'Task deleted');
+}
+
+// Save to local storage
+function toLocalStorage(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Personalize
+filterTasks(tasksObject);
+function filterTasks(taks) {
+    const numAll = taks.length;
+    const numPending = 2;
+    const numCompleted = 3;
+
+    countAll.textContent = numAll;
+    countPending.textContent = numPending;
+    countCompleted.textContent = numCompleted;
+
 }
 
 // Utils
