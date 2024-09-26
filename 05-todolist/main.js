@@ -59,6 +59,8 @@ const createTask = (task) => {
     }
     renderTasks(tasksObject);
     toLocalStorage(tasksObject);
+    statusFilter();
+
 }
 
 
@@ -165,6 +167,8 @@ function deleteTask(task) {
     renderTasks(tasksObject);
     toLocalStorage(tasksObject);
     showAlerte('success', 'Task deleted');
+
+    statusFilter();
 }
 
 // Save to local storage
