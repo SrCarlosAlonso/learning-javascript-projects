@@ -23,6 +23,7 @@
   --alerta-error: #ff4545;
   --alerta-error-dark: #c23838;
   --alerta-success: #6bcd75;
+  --alert-notification: #51a1ff;
 
   --button-color: #3bdb4b;
   --button-color-dark: #00a711;
@@ -146,6 +147,9 @@ form {
   }
   &.alert-success {
     background-color: var(--alerta-success);
+  }
+  &.alert-notification {
+    background-color: var(--alert-notification);
   }
 }
 

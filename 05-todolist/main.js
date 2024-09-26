@@ -12,6 +12,7 @@ const countCompleted = document.getElementById('count-completed');
 // Object taks empty
 const tasksObject = [];
 
+// Event Listeners
 window.addEventListener('load', () => {
     let tasksLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
     if (tasksLocal.length > 0) {
@@ -20,7 +21,9 @@ window.addEventListener('load', () => {
     }
 });
 
-// Event Listeners
+statusFilter();
+
+
 formTask.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -49,7 +52,7 @@ const createTask = (task) => {
         const positionEdit = tasksObject.findIndex(task => task.id === taskEditID);
         tasksObject[positionEdit].title = task.title;
         taskEditID = null;
-        showAlerte('success', 'Task updated');
+        showAlerte('notification', 'Task updated');
     } else {
         tasksObject.push(task);
         showAlerte('success', 'Task added');
@@ -134,6 +137,8 @@ function completedTask(task) {
         toLocalStorage(tasksObject);
         renderTasks(tasksObject);
 
+        showAlerte('notification', 'Task completed');
+
     } else {
         iconCheck.src = '/public/icon-pending.svg';
         textTask.classList.remove('title-completed');
@@ -150,7 +155,6 @@ function editTask(task) {
     console.log('Edit task', task);
     inputTask.value = task.title;
     taskEditID = task.id;
-
 }
 
 function deleteTask(task) {
@@ -169,18 +173,15 @@ function toLocalStorage(tasks) {
 }
 
 // Personalize
-filterTasks(tasksObject);
-function filterTasks(taks) {
-    const numAll = taks.length;
-    const numPending = 2;
-    const numCompleted = 3;
+function statusFilter() {
+    const allTasks = document.getElementById('count-all');
+    const pendingTasks = document.getElementById('count-pending');
+    const completedTasks = document.getElementById('count-completed');
 
-    countAll.textContent = numAll;
-    countPending.textContent = numPending;
-    countCompleted.textContent = numCompleted;
+    const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
 
+    allTasks.innerText = taskFromLocal.length;
 }
-
 // Utils
 function getRandomID() {
     const array = new Uint32Array(1);
