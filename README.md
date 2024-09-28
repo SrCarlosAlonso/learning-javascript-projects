@@ -1,4 +1,4 @@
-# Listado de proyectos actuales
+# Current Projects List
 
 1. Calculadora [Link](01-calculator)
 2. Watch [Link](02-watch)
@@ -6,13 +6,16 @@
 4. Counter using Vite [Link](04-counter-vite)
 5. Todo List [Link](05-todolist)
 
-## Ideas de proyectos
-Ideas de proyectos basicos para practicar y mejorar habilidades de javascript.
+## Figma Files
 
-### ~~1. Todolist con Persistencia en Local Storage~~
+You can also explore the Figma files for these projects. Click the link below to access them:
 
-~~- Descripción: Desarrolla una aplicación de lista de tareas (To-Do List) donde puedas agregar, editar y eliminar tareas. Utiliza el localStorage para guardar las tareas y que se mantengan después de recargar la página.~~
-~~- Desafíos: Trabaja con manipulación del DOM, almacenamiento local, y eventos de formulario.~~
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma Icon" height="14" width="14" /> [Open Figma Project](https://www.figma.com/team_invite/redeem/r0PWWbiW8O59T1dz8rj2Cv)
+
+---
+
+## Project Ideas
+Basic project ideas to practice and improve JavaScript skills.
 
 ### 2. Juego de Memoria (Memory Game)
 
@@ -47,4 +50,9 @@ Ideas de proyectos basicos para practicar y mejorar habilidades de javascript.
 ### 8. Aplicación de Chat en Tiempo Real
 
 - Descripción: Implementa una aplicación de chat en tiempo real usando WebSockets o una plataforma como Firebase. Permite a los usuarios enviar y recibir mensajes instantáneamente.
-- Desafíos: Comunicación en tiempo real, manejo de mensajes y usuarios, y
+- Desafíos: Comunicación en tiempo real, manejo de mensajes y usuarios.
+
+### ~~1. Todolist con Persistencia en Local Storage~~
+
+~~- Descripción: Desarrolla una aplicación de lista de tareas (To-Do List) donde puedas agregar, editar y eliminar tareas. Utiliza el localStorage para guardar las tareas y que se mantengan después de recargar la página.~~
+~~- Desafíos: Trabaja con manipulación del DOM, almacenamiento local, y eventos de formulario.~~
