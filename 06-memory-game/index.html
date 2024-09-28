@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style.css" />
+  <title>06 Memory Game</title>
+</head>
+
+<body class="border-animate gradient">
+  <div id="start" class="hidden">
+    <h1>Memory Game</h1>
+    <p>Click on the cards to know if they are the same or not</p>
+    <button id="start-button">Start</button>
+  </div>
+  <div id="app" class="container">
+
+    <header>
+      <h3 class="header-tries"> Tries: <span id="tries-counter">0</span></h3>
+      <h3 class="header-misses"> Misses: <span id="misses-counter">0</span></h3>
+    </header>
+
+    <main>
+      <div class="game-container">
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-known">
+          <img src="/assets/img/img-fresa.png"/>
+        </div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+        <div class="card card-unknown"></div>
+      </div>
+    </main>
+
+    <footer>
+      <h3 class="timer-counter">Timer: <span id="timer-counter">0</span>s</h3>
+      <nav>
+        <button id="action-button">Start</button>
+        <span>|</span>
+        <button id="end-button">End</button>
+      </nav>
+    </footer>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
