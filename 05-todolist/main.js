@@ -104,7 +104,7 @@ function renderTasks(tasksObject) {
     }
 
     tasksObject.forEach((task) => {
-        const { id, title, completed, date } = task;
+        const { id } = task;
         const li = document.createElement('li');
         li.id = id;
         li.classList.add('task');
@@ -188,15 +188,19 @@ function completedTask(task) {
 let taskEditID = null;
 
 function editTask(task) {
-    console.log('Edit task', task);
     inputTask.value = task.title;
     taskEditID = task.id;
 }
 
 function deleteTask(task) {
-    console.log('Delete task', task);
     const { id } = task;
     const index = tasksObject.findIndex((task) => task.id === id);
+
+    // Ask confirmation
+    const confirmation = confirm('Are you sure you want to delete this task?');
+    if (!confirmation) return;
+    // Todo: Change this confirmation to a modal or something more elegant
+
     tasksObject.splice(index, 1);
     renderTasks(tasksObject);
     toLocalStorage(tasksObject);
@@ -222,14 +226,12 @@ function statusFilter() {
     pendingTasks.innerText = taskFromLocal.filter(task => !task.completed).length;
     completedTasks.innerText = taskFromLocal.filter(task => task.completed).length;
 }
-
 // Show all tasks 
 function showAllTasks() {
     renderTasks(tasksObject);
 }
 // Show pending tasks
 function showPendingTasks() {
-
     const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
     const taskPending = taskFromLocal.filter(task => !task.completed);
 
@@ -237,7 +239,6 @@ function showPendingTasks() {
 }
 // Show completed tasks
 function showCompletedTasks() {
-
     const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
     const taskCompleted = taskFromLocal.filter(task => task.completed);
 
