@@ -9,6 +9,11 @@ const countAll = document.getElementById('count-all');
 const countPending = document.getElementById('count-pending');
 const countCompleted = document.getElementById('count-completed');
 
+const navList = document.getElementById('nav-list');
+const btnAll = document.getElementById('btn-all');
+const btnPending = document.getElementById('btn-pending');
+const btnCompleted = document.getElementById('btn-completed');
+
 // Object taks empty
 const tasksObject = [];
 
@@ -43,6 +48,34 @@ formTask.addEventListener('submit', (e) => {
     inputTask.value = '';
 });
 
+
+navList.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = e.target;
+
+    if (target.id === 'btn-all') {
+        btnAll.classList.add('nav-active');
+        btnPending.classList.remove('nav-active');
+        btnCompleted.classList.remove('nav-active'); 
+           
+        showAllTasks();
+
+    } else if (target.id === 'btn-pending') {
+        btnPending.classList.add('nav-active');
+        btnAll.classList.remove('nav-active');
+        btnCompleted.classList.remove('nav-active');
+        
+        showPendingTasks();
+
+    } else if (target.id === 'btn-completed') {
+        btnCompleted.classList.add('nav-active');
+        btnAll.classList.remove('nav-active');
+        btnPending.classList.remove('nav-active');
+
+        showCompletedTasks();
+
+    }
+});
 
 // Functions
 const createTask = (task) => {
@@ -150,6 +183,7 @@ function completedTask(task) {
         toLocalStorage(tasksObject);
         renderTasks(tasksObject);
     }
+    statusFilter();
 }
 let taskEditID = null;
 
@@ -183,9 +217,33 @@ function statusFilter() {
     const completedTasks = document.getElementById('count-completed');
 
     const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-
+    
     allTasks.innerText = taskFromLocal.length;
+    pendingTasks.innerText = taskFromLocal.filter(task => !task.completed).length;
+    completedTasks.innerText = taskFromLocal.filter(task => task.completed).length;
 }
+
+// Show all tasks 
+function showAllTasks() {
+    renderTasks(tasksObject);
+}
+// Show pending tasks
+function showPendingTasks() {
+
+    const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+    const taskPending = taskFromLocal.filter(task => !task.completed);
+
+    renderTasks(taskPending);
+}
+// Show completed tasks
+function showCompletedTasks() {
+
+    const taskFromLocal = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
+    const taskCompleted = taskFromLocal.filter(task => task.completed);
+
+    renderTasks(taskCompleted);
+}
+
 // Utils
 function getRandomID() {
     const array = new Uint32Array(1);
