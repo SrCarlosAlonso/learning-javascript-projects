@@ -3,14 +3,16 @@
 1. Calculadora [Link](01-calculator)
 2. Watch [Link](02-watch)
 3. Blog API [Link](03-blog-API)
+4. Counter using Vite [Link](04-counter-vite)
+5. Todo List [Link](05-todolist)
 
 ## Ideas de proyectos
 Ideas de proyectos basicos para practicar y mejorar habilidades de javascript.
 
-### 1. Todolist con Persistencia en Local Storage
+### ~~1. Todolist con Persistencia en Local Storage~~
 
-- Descripción: Desarrolla una aplicación de lista de tareas (To-Do List) donde puedas agregar, editar y eliminar tareas. Utiliza el localStorage para guardar las tareas y que se mantengan después de recargar la página.
- - Desafíos: Trabaja con manipulación del DOM, almacenamiento local, y eventos de formulario.
+~~- Descripción: Desarrolla una aplicación de lista de tareas (To-Do List) donde puedas agregar, editar y eliminar tareas. Utiliza el localStorage para guardar las tareas y que se mantengan después de recargar la página.~~
+~~- Desafíos: Trabaja con manipulación del DOM, almacenamiento local, y eventos de formulario.~~
 
 ### 2. Juego de Memoria (Memory Game)
 
