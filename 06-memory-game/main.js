@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Define cards
 const cards = [
-  { name: 'brocoli', img: '/assets/img/img-brocoli.png', state: false },
-  { name: 'frenshfries', img: '/assets/img/img-frenshfries.png', state: false },
-  { name: 'fresa', img: '/assets/img/img-fresa.png', state: false },
-  { name: 'pizza', img: '/assets/img/img-pizza.png', state: false },
-  { name: 'popcorn', img: '/assets/img/img-popcorn.png', state: false },
-  { name: 'sushi', img: '/assets/img/img-sushi.png', state: false },
+  { name: 'brocoli', img: '/assets/img/img-brocoli.webp', state: false },
+  { name: 'frenshfries', img: '/assets/img/img-frenshfries.webp', state: false },
+  { name: 'fresa', img: '/assets/img/img-fresa.webp', state: false },
+  { name: 'pizza', img: '/assets/img/img-pizza.webp', state: false },
+  { name: 'popcorn', img: '/assets/img/img-popcorn.webp', state: false },
+  { name: 'sushi', img: '/assets/img/img-sushi.webp', state: false },
 ];
 let cardGames = [...cards, ...cards];
 shuffleCards(cardGames);
