@@ -1,6 +1,7 @@
 console.log("Hello World!")
 
 // DOM scipting
+const navButtons = document.getElementById("nav-buttons");
 const actionButton = document.getElementById("action-button");
 const endButton = document.getElementById("end-button");
 
@@ -10,14 +11,17 @@ const timerCounter = document.getElementById("timer-counter");
 
 triesCounter.innerText = 0;
 missesCounter.innerText = 0;
-timerCounter.innerText = 30;
+let setTimer = timerCounter.innerText = 10;
 
 const gameContainer = document.querySelector(".game-container");
 
 // Events listeners
 document.addEventListener("DOMContentLoaded", () => {
   renderCards(cardGames);
+});
 
+actionButton.addEventListener("click", () => {
+  resetGame();
 });
 
 // Define cards
@@ -111,13 +115,66 @@ function shuffleCards(cards) {
 }
 
 // Functions
-function timer() {
-  const time = timerCounter.innerText * 10000;
+let isStarted = false;
+
+actionButton.addEventListener("click", () => {
+  navButtons.firstElementChild.remove()
+  const restarButton = document.createElement("button");
+  restarButton.innerText = "Restart";
+  restarButton.id = "restart-button";
+
+  navButtons.insertBefore(restarButton, navButtons.firstChild);
+
+  restarButton.addEventListener("click", () => {
+    navButtons.firstElementChild.remove()
+    const startButton = document.createElement("button");
+    startButton.innerText = "Start";
+    startButton.id = "action-button";
+    navButtons.insertBefore(startButton, navButtons.firstChild);
+
+    startButton.addEventListener("click", () => {
+      startTimer();
+    });
+
+    resetGame();
+    startTimer();
+  });
+
+  startTimer();
+  return;
+});
+
+let counterDown;
+function startTimer() {
+  isStarted = !isStarted;
+
+  if (!isStarted) {
+    console.log('Timer is already started!');
+    renderCards(cardGames);
+    setTimer = 10;
+    clearInterval(counterDown);
+    return;
+  };
+
+  counterDown = setInterval(() => {
+    setTimer--;
+    timerCounter.innerText = setTimer;
+
+    if (setTimer === 0) {
+      console.log('Time is over!');
+      isStarted = false;
+      return clearInterval(counterDown);
+    }
+  }, 1000);
+
+  isStarted = true;
 }
 
 // Reset game
-actionButton.addEventListener("click", () => {
+function resetGame() {
+  setTimer = 10;
+  timerCounter.innerText = setTimer;
   triesCounter.innerText = 0;
   missesCounter.innerText = 0;
   renderCards(cardGames);
-});
+}
