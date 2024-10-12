@@ -5,6 +5,8 @@
 3. Blog API [Link](03-blog-API)
 4. Counter using Vite [Link](04-counter-vite)
 5. Todo List [Link](05-todolist)
+6. Memory Game (no finished) [Link](06-memory-game)
+6. Blackjack (no finished) [Link](07-blackjack)
 
 ## Figma Files
 
@@ -16,11 +18,6 @@ You can also explore the Figma files for these projects. Click the link below to
 
 ## Project Ideas
 Basic project ideas to practice and improve JavaScript skills.
-
-### 2. Juego de Memoria (Memory Game)
-
-- Descripción: Crea un juego de memoria donde el usuario debe encontrar pares de cartas idénticas. Implementa lógica para verificar pares y contar los intentos.
-- Desafíos: Manipulación del DOM, gestión de estados del juego, y lógica de emparejamiento.
 
 ### 3. Aplicación de Notas con Markdown
 
@@ -56,3 +53,9 @@ Basic project ideas to practice and improve JavaScript skills.
 
 ~~- Descripción: Desarrolla una aplicación de lista de tareas (To-Do List) donde puedas agregar, editar y eliminar tareas. Utiliza el localStorage para guardar las tareas y que se mantengan después de recargar la página.~~
 ~~- Desafíos: Trabaja con manipulación del DOM, almacenamiento local, y eventos de formulario.~~
+
+### ~~2. Juego de Memoria (Memory Game)~~
+
+~~- Descripción: Crea un juego de memoria donde el usuario debe encontrar pares de cartas idénticas. Implementa lógica para verificar pares y contar los intentos.~~
+~~- Desafíos: Manipulación del DOM, gestión de estados del juego, y lógica de emparejamiento.~~
+
