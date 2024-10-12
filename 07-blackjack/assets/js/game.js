@@ -41,8 +41,6 @@ const takecard = () => {
         throw 'No card in the deck'
     }
     const card = deck.pop();
-    console.log(deck)
-    console.log(card);
     return card
 }
 takecard()
@@ -50,31 +48,17 @@ takecard()
 
 // Value depend of type of card
 const cardValue = (card) => {
-
     const valor = card.slice(0, -1)
-    let point = 0;
 
     if (isNaN(valor)) {
-        console.log('Not number')
-
-        const letter = valor[0]
-        console.log(letter)
-
-        if (letter === 'K' || letter === 'J' || letter === 'Q') {
-            point = 10;
-            console.log(point)
-            return
-
-        } else if (letter === 'A') {
-            point = 11;
-            console.log(point)
-
-        }
-
+        // operador ternario condicion ? si es true : si no
+        return (valor === 'A') ? 11 : 10;
     } else {
-        console.log('Number')
-        point = Number(valor)
-        console.log(point)
+        return Number(valor);
     }
 }
-cardValue('AD')
+console.log(cardValue('3D'))
+console.log(cardValue('JD'))
+console.log(cardValue('AD'))
+
+// 
