@@ -19,25 +19,22 @@
 
         <main class="container">
             <div class="deck-container">
-                <h2>Player deck</h2>
+                <h2>Player deck | Score <span id="playerScore"></span></h2>
                 <div id="player-deck" class="player-cards">
-                    <img class="card" src="/assets/cartas/2H.png" alt="10D">
-                    <img class="card" src="/assets/cartas/3S.png" alt="10D">
-                    <img class="card" src="/assets/cartas/4D.png" alt="10D">
-                </div>
-            </div>
-       
-            <div class="deck-container">
-                <h2>Computer deck</h2>
-                <div id="player-deck" class="player-cards">
-                    <img class="card" src="/assets/cartas/JC.png" alt="10D">
-                    <img class="card" src="/assets/cartas/QD.png" alt="10D">
-                    <img class="card" src="/assets/cartas/KS.png" alt="10D">
+                    <!-- <img class="card" src="/assets/cartas/2H.png" alt="10D"> -->
                 </div>
             </div>
 
+            <div class="deck-container">
+                <h2>Computer deck | Score <span id="computerScore"></span></h2>
+                <div id="computer-deck" class="player-cards">
+                    <!-- <img class="card" src="/assets/cartas/JC.png" alt="10D"> -->
+                </div>
+            </div>
             <nav class="button-game">
                 <button id="newGame">New Game</button>
+            </nav>
+            <nav class="button-game">
                 <button id="hit" disabled>Hit</button>
                 <button id="stand" disabled>Stand</button>
             </nav>

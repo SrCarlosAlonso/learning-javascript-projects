@@ -1,3 +1,5 @@
+
+
 html,
 body {
   height: 100%;
@@ -46,6 +48,11 @@ main {
       font-size: 2rem;
       font-weight: 900;
       color: #e4efe2d6;
+    }
+
+    .deck-container {
+      min-height: 232px;
+      text-align: center;
     }
 
     .button-game {
