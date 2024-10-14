@@ -88,13 +88,13 @@ function playerGame() {
         txtPlayerScore.textContent = playerScore;
         showCard(card, deckContainerPlayer);
         return
-    } else {
-        computerGame();
     }
+    computerGame();
 }
 
 function computerGame() {
     console.log('Computer turns')
+
     do {
         const card = takecard();
         const value = cardValue(card);
@@ -103,10 +103,18 @@ function computerGame() {
         showCard(card, deckContainerComp);
 
         if (computerScore >= 21 || playerScore > 21) break;
-    }
-    while (computerScore < 21 && computerScore <= playerScore) {
-    }
-    return;
+
+    } while (computerScore < 21 && computerScore <= playerScore)
+
+    setTimeout(() => {
+        if (computerScore === playerScore) {
+            theWinner('Tie game')
+        } else if (computerScore > playerScore) {
+            theWinner('Computer wins')
+        } else if (computerScore < playerScore) {
+            theWinner('Player wins')
+        }
+    }, 200);
 }
 
 // Event lister 
@@ -116,19 +124,7 @@ btnNewGame.addEventListener('click', function () {
 
     btnStand.disabled = false;
     btnHit.disabled = false;
-
-    playerScore = 0;
-    computerScore = 0;
-
-    deckContainerPlayer.innerHTML = '';
-    deckContainerComp.innerHTML = '';
-    txtComputerScore.textContent = 0;
-    txtPlayerScore.textContent = 0;
-
-    btnNewGame.style.backgroundColor = 'tomato';
-    btnNewGame.style.color = '#fff';
-    btnNewGame.style.border = '1px solid tomato'
-
+    resetGame();
     playerGame();
 });
 
@@ -144,3 +140,20 @@ btnStand.addEventListener('click', function () {
     btnStand.disabled = true;
     computerGame();
 });
+
+// Utility functions
+function theWinner(mensaje) {
+    confirm(mensaje)
+}
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    deckContainerPlayer.innerHTML = '';
+    deckContainerComp.innerHTML = '';
+    txtComputerScore.textContent = 0;
+    txtPlayerScore.textContent = 0;
+    btnNewGame.style.backgroundColor = 'tomato';
+    btnNewGame.style.color = '#fff';
+    btnNewGame.style.border = '1px solid tomato'
+}
