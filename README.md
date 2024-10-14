@@ -6,7 +6,7 @@
 4. Counter using Vite [Link](04-counter-vite)
 5. Todo List [Link](05-todolist)
 6. Memory Game (no finished) [Link](06-memory-game)
-6. Blackjack (no finished) [Link](07-blackjack)
+6. Blackjack [Link](07-blackjack)
 
 ## Figma Files
 
