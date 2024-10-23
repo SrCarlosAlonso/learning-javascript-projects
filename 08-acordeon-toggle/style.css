@@ -1,0 +1,170 @@
+:root {
+  --background: #16282e;
+  --background-light: #1e3a3f;
+  --text: #c0eeff;
+  --accent: #4ac8f6;
+}
+
+html {
+  font-size: 62.5%; /* Esto debería hacer que 1rem = 10px */
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Aleo", serif;
+  font-weight: 300;
+  margin: 2rem;
+}
+
+h1 {
+  font-size: 3.2rem;
+  font-weight: 100;
+
+  strong {
+    color: var(--accent);
+    font-weight: 900;
+  }
+}
+
+h2 {
+  font-size: 2.1rem;
+  line-height: 1.1;
+}
+
+header {
+  padding: 0.8rem 0;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#app {
+  width: 100%;
+  max-width: 1000px;
+  overflow: hidden;
+}
+
+.container,
+#slider-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 1rem auto;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+
+  border: 1px solid var(--accent);
+}
+
+.column {
+  padding: 1rem;
+}
+
+ul#acordeon {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  border-top: 1px solid var(--accent);
+  overflow: hidden;
+}
+
+ul#acordeon li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--accent);
+  transition: all 250ms ease;
+  &:hover {
+    filter: saturate(5);
+    cursor: pointer;
+    img {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+ul#acordeon h3 {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+}
+
+ul#acordeon svg,
+ul#acordeon img {
+  width: 2.1rem;
+  transition: transform 250ms ease-in-out;
+}
+
+ul#acordeon svg:hover,
+ul#acordeon img:hover {
+  transform: rotate(360deg);
+}
+
+ul#acordeon div {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  margin: 0.5rem 0;
+  background: var(--background-light);
+  font-size: 1.4rem;
+}
+.hidden {
+  display: none;
+}
+.hidden-height {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+}
+/* Animar el display nonoe */
+.active {
+  display: block;
+  height: auto;
+  opacity: 1;
+  transition: all 250ms ease;
+}
+
+#imagen-active img {
+  width: 100%;
+  border-radius: 0.5rem;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+/* SLIDER */
+
+.slider {
+  width: 225px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  overflow: hidden;
+  gap: 0.5rem;
+  aspect-ratio: 1/1;
+}
+.slider-item {
+  display: none;
+}
+.slide-active {
+  display: block;
+}
+.slider-item img {
+  border-radius: 0.5rem;
+  width: 205px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
