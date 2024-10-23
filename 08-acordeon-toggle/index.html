@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acordeon Toggle</title>
+  <script type="module" src="/main.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --background: #16282e;
+      --background-light: #1e3a3f;
+      --text: #c0eeff;
+      --accent: #4ac8f6;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      font-family: "Aleo", serif;
+      font-weight: 300;
+      font-size: 62.5%;
+      margin: 2rem;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 100;
+
+      strong {
+        color: var(--accent);
+        font-weight: 900;
+      }
+    }
+
+    h2 {
+      font-size: 2.1rem;
+      line-height: 1.1;
+    }
+
+    header {
+      padding: .8rem 0;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      border-radius: .5rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+
+      border: 1px solid var(--accent);
+    }
+
+    .column {
+      padding: 1rem;
+    }
+
+    ul#acordeon {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      border-top: 1px solid var(--accent);
+      overflow: hidden;
+    }
+
+    ul#acordeon li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--accent);
+
+      &:hover{
+        filter: saturate(5);
+        cursor: pointer;
+        img{
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    ul#acordeon h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin: 0.5rem 0;
+    }
+
+    ul#acordeon svg,
+    ul#acordeon img {
+      width: 2.1rem;
+      transition: transform 250ms ease-in-out;
+    }
+
+    ul#acordeon svg:hover,
+    ul#acordeon img:hover {
+      transform: rotate(360deg);
+    }
+
+    ul#acordeon div {
+      width: 100%;
+      padding: 1.2rem 1.5rem;
+      margin: 0.5rem 0;
+      background: var(--background-light);
+      font-size: 1rem;
+      display: none;
+    }
+
+    #imagen-active img {
+      width: 100%;
+      border-radius: .5rem;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="app">
+
+    <header>
+      <h1>Esto es un <strong> Acordeon Toggle</strong> </h1>
+    </header>
+
+    <div class="container">
+
+      <div class="column">
+        <h2>Aquí vamos a poner los elementos del acordeon</h2>
+        <ul id="acordeon">
+          <!-- Lista dinamica -->
+        </ul>
+      </div>
+
+      <div class="column">
+        <div id="imagen-active">
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+</body>
+
+</html>
