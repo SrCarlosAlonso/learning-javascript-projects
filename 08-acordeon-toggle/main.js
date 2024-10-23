@@ -1,77 +1,50 @@
-const contentAcordeon = [
-  {
-    id: 1,
-    title: "¿Qué colores se consideran primarios?",
-    content: "Los colores primarios como el rojo, azul y amarillo son esenciales en la teoría del color. Estos colores no se pueden obtener mezclando otros colores y son fundamentales para crear combinaciones armoniosas.",
-    image: "https://plus.unsplash.com/premium_vector-1689096833880-42980c252802?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    id: 2,
-    title: "¿Cómo se forman los colores secundarios?",
-    content: "Los colores secundarios, como el verde, naranja y violeta, se forman mezclando dos colores primarios en partes iguales. Estas combinaciones permiten expandir la gama de colores y crear contrastes interesantes.",
-    image: "https://plus.unsplash.com/premium_vector-1689096659615-ba27c09fa1ea?q=80&w=3112&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    id: 3,
-    title: "¿Qué es una forma geométrica?",
-    content: "Las formas geométricas son figuras planas o tridimensionales que tienen propiedades definidas, como ángulos y lados. Ejemplos comunes incluyen círculos, cuadrados, triángulos y esferas.",
-    image: "https://plus.unsplash.com/premium_vector-1689096635358-c37d266c4f31?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    id: 4,
-    title: "¿Cuáles son las formas básicas?",
-    content: "Las formas geométricas básicas incluyen el círculo, el cuadrado, el triángulo y el rectángulo. Estas formas son fundamentales en el diseño y se utilizan para crear composiciones visuales equilibradas.",
-    image: "https://plus.unsplash.com/premium_vector-1721903574478-d36e185ba73c?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  },
-  {
-    id: 5,
-    title: "¿Qué es el contraste de color?",
-    content: "El contraste de color se refiere a la diferencia visual entre dos colores. Un alto contraste, como el que existe entre el negro y el blanco, crea una separación clara, mientras que los colores con bajo contraste pueden verse más suaves y menos definidos.",
-    image: "https://plus.unsplash.com/premium_vector-1726490463160-982bc3089bec?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  }
-]
+// Import json y asignar al content
+import contentJSON from "./acordeon-content.json";
+const contentAcordeon = contentJSON;
+
 // Create DOM elements
-const acordeon = document.querySelector("#acordeon")
-contentAcordeon.forEach(item => {
-  const li = document.createElement("li")
-  li.id = `id-${item.id}`
-  li.addEventListener("click", () => toggleImage(item.id))
-  const h3 = document.createElement("h3")
-  const icon = document.createElement("img")
-  const div = document.createElement("div")
+const acordeon = document.querySelector("#acordeon");
+contentAcordeon.forEach((item) => {
+  const li = document.createElement("li");
+  li.id = `id-${item.id}`;
+  li.addEventListener("click", () => acordeonToggle(item.id));
+  const h3 = document.createElement("h3");
+  const icon = document.createElement("img");
+  const div = document.createElement("div");
+  div.id = `cont-${item.id}`;
+  div.classList.add('hidden')
 
-  h3.innerText = item.title
-  icon.src = '/public/icon.svg';
-  div.innerText = item.content
+  h3.innerText = item.title;
+  icon.src = "/public/icon.svg";
+  div.innerText = item.content;
 
-  li.appendChild(h3)
-  li.appendChild(icon)
-  li.appendChild(div)
+  li.appendChild(h3);
+  li.appendChild(icon);
+  li.appendChild(div);
 
-  acordeon.appendChild(li)
+  acordeon.appendChild(li);
 });
 
-
 // Handel images
-const containerImage = document.querySelector("#imagen-active")
-const activeImage = document.createElement("img")
-const liAcordeon = document.querySelectorAll("#acordeon li")
+const containerImage = document.querySelector("#imagen-active");
+const activeImage = document.createElement("img");
+const liAcordeon = document.querySelectorAll("#acordeon li");
 
 // Set first image
-activeImage.src = contentAcordeon[0].image
-containerImage.appendChild(activeImage)
+activeImage.src = contentAcordeon[0].image;
+containerImage.appendChild(activeImage);
 
 // Handel hover images
-liAcordeon.forEach(li => {
+liAcordeon.forEach((li) => {
   let hoverTime;
-  li.addEventListener('mouseenter', () => {
+  li.addEventListener("mouseenter", () => {
     hoverTime = setTimeout(() => {
-      const id = li.id.replace('id-', '')
-      toggleImage(id)
-    }, 100);
+      const id = li.id.replace("id-", "");
+      toggleImage(id);
+    }, 500);
   });
 
-  li.addEventListener('mouseleave', () => {
+  li.addEventListener("mouseleave", () => {
     clearTimeout(hoverTime);
   });
 });
@@ -79,7 +52,96 @@ liAcordeon.forEach(li => {
 // Toggle images
 function toggleImage(id) {
   activeImage.remove();
-  const newImage = contentAcordeon[`${id - 1}`].image
-  containerImage.appendChild(activeImage)
-  activeImage.src = newImage
+  const newImage = contentAcordeon[`${id - 1}`].image;
+  containerImage.appendChild(activeImage);
+  activeImage.src = newImage;
+}
+
+// Mostrar content
+let isActive;
+
+function acordeonToggle(id) {
+  const contentID = `#cont-${id}`;
+  const contentAcordeon = document.querySelector(contentID)
+  const icon = contentAcordeon.parentElement.querySelector('img');
+
+  if (isActive) {
+    contentAcordeon.classList.add('hidden-height');
+    contentAcordeon.classList.remove('active');
+    icon.style.transform = 'rotate(0deg)';
+    setTimeout(() => {
+      contentAcordeon.classList.add('hidden');
+    }, 10);
+    isActive = false;
+
+  } else {
+    contentAcordeon.classList.remove('hidden');
+    contentAcordeon.classList.remove('hidden-height');
+    contentAcordeon.classList.add('active');
+    icon.style.transform = 'rotate(180deg)';
+    isActive = true;
+  }
+}
+
+// Crear slider de las imagenes
+
+// Sacamos las imagenes del json y las metemos en un array
+const sliderImages = [];
+const sliderContainer = document.querySelector('.slider');
+const sliderItem = document.querySelectorAll('.slider-item');
+
+function setImageSlider() {
+  contentAcordeon.map((item) => {
+    const { image } = contentAcordeon
+    sliderImages.push(item.image);
+  });
+  return createSlider(sliderImages)
+}
+setImageSlider();
+
+// Crear función que recorre el array y crea cada slider
+function createSlider(array) {
+  let count = 0;
+
+  array.forEach(image => {
+    const div = document.createElement('div');
+    div.classList.add('slider-item')
+    div.id = `slider-item-${count += 1}`;
+    const img = document.createElement('img');
+    img.src = image;
+
+    div.appendChild(img);
+    sliderContainer.appendChild(div);
+  });
+}
+// Crear una funcion que oculta y muestra cada slide
+const containerIMG = document.querySelectorAll('.slider-item');
+
+function actionSlider() {
+  let index = 0;
+  const count = containerIMG.length;
+
+  showImage(index)
+
+  setInterval(() => {
+    hiddeImage(index);
+
+    index += 1;
+    if (index === count) {
+      index = 0;
+    }
+    showImage(index);
+  }, 1250);
+
+}
+actionSlider();
+
+function showImage(index) {
+  const nextImg = containerIMG[`${index}`];
+  nextImg.classList.add('slide-active');
+}
+
+function hiddeImage(index) {
+  const activeImg = containerIMG[`${index}`];
+  activeImg.classList.remove('slide-active');
 }
