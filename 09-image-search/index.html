@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+  <link rel="stylesheet" href="/style.css" />
+  <script type="module" src="/main.js"></script>
+</head>
+
+<body>
+  <main class="flex flex-col min-h-screen">
+    <header class="relative">
+      <div class="max-w-screen-md mx-auto px-4 py-16 text-center relative z-10">
+        <h1 class="text-custom-white font-light text-5xl p-3">Image Search <b class="text-custom-acento">Made Easy</b>
+        </h1>
+        <p class="text-2xl font-light opacity-70">Find the perfect image with filters from <u
+            class="text-custom-acento">Pixabay</u> and <u class="text-custom-acento">Unsplash</u></p>
+
+        <div id="search-container">
+          <form id="search-form" class="flex flex-row flex-wrap gap-4 justify-between py-4">
+            <input type="text" placeholder="Type here to search for images…"
+              class="w-full py-4 px-6 border-custom-white border rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-custom-acento focus:border-custom-acento transition-all duration-300 placeholder:text-custom-white" />
+
+            <div id="filters" class="flex flex-row gap-4">
+              <div
+                class="filter-options border border-transparent flex flex-row items-center gap-4 rounded-lg px-5 py-3 filter-active">
+                <label for="unspash">Unspash</label>
+                <input type="radio" name="source" value="unspash" checked />
+              </div>
+              <div
+                class="filter-options border border-transparent flex flex-row items-center gap-4 rounded-lg px-5 py-3">
+                <label for="pixabay">Pixabay</label>
+                <input type="radio" name="source" value="pixabay" />
+              </div>
+            </div>
+
+            <button type="submit" value="Search">Find Images</button>
+          </form>
+        </div>
+    </header>
+
+    </div>
+
+    <div id="images-container"
+      class="grid grid-cols-4 w-full gap-0 bg-custom-negro-medio flex-1 place-items-center border-t border-custom-acento">
+      <h3 class="place-items-center col-span-4 text-4xl font-light opacity-70">No results yet. Begin your search!</h3>
+      <!-- <img src="https://picsum.photos/id/10/200/300" alt="Image 1" />
+      <img src="https://picsum.photos/id/100/200/300" alt="Image 2" />
+      <img src="https://picsum.photos/id/1000/200/300" alt="Image 3" />
+      <img src="https://picsum.photos/id/1001/200/300" alt="Image 4" /> -->
+    </div>
+  </main>
+
+</body>
+
+</html>
