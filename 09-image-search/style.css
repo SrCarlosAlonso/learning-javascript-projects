@@ -7,7 +7,7 @@
 
 /* Add custom variables */
 :root {
-  --background-header: url("https://images.unsplash.com/photo-1493673272479-a20888bcee10");
+  --background-header: url("https://pixabay.com/api/?key=8305684-c57a424dfd0b3763951a9869a&q=yellow+flowers&image_type=photo&pretty=true");
 }
 
 /* Add custom styles here */
@@ -58,6 +58,15 @@ button {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
+  animation: fadeInd 0.5s ease-in-out;
+}
+@keyframes fadeInd {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .filter-active {
