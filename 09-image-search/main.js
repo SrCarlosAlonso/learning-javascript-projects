@@ -2,7 +2,6 @@
 const AKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_AKEY;
 const SKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_SKEY;
 const AKEY_PIXABAY = import.meta.env.VITE_PIXABAY_AKEY
-// const URL_PIXAVAY = 'https://pixabay.com/api/?key=8305684-c57a424dfd0b3763951a9869a&q=yellow+flowers&image_type=photo&pretty=true'
 
 
 let source = 'yellow+flowers';
