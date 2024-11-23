@@ -52,10 +52,20 @@ async function renderImage(obj) {
  */
 document.addEventListener('DOMContentLoaded', function () {
   filter_pixabay.addEventListener('click', (e) => {
-    const target = e.target;
-    console.log(target);
+    activeFilter(filter_pixabay);
+  });
+  filter_unspash.addEventListener('click', (e) => {
+    activeFilter(filter_unspash);
   });
 });
+function activeFilter(filter) {
+  if ( filter.classList.contains('filter-active')) {
+    filter.classList.remove('filter-active');
+  } else {
+    filter.classList.add('filter-active');
+  }
+}
+// TODO: Solo puede existir un filtro activo, y activar funcionalidad de checkbox.
 /*
  * Eventos de carga de imagenes
  */
