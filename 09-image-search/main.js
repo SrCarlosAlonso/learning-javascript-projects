@@ -3,23 +3,23 @@ const AKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_AKEY;
 const SKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_SKEY;
 const AKEY_PIXABAY = import.meta.env.VITE_PIXABAY_KEY
 
-
+// URls de API
 let source = 'yellow+flowers';
 const URL_PIXABAY = `https://pixabay.com/api/?key=${AKEY_PIXABAY}&q=`;
+// TODO: Configurar URL de unsplash
+const URL_UNSPLASH = `https://api.unsplash.com/search/photos?query=`;
 let URL = URL_PIXABAY + source;
 
 // DOM
 const imgContainer = document.querySelector('#images-container');
 const searchForm = document.querySelector('#search-form');
 const searchInput = document.querySelector('#search-input');
-const filter_pixabay = document.querySelector('#filter-pixabay');
-const filter_unspash = document.querySelector('#filter-unspash');
+const filter_container = document.querySelectorAll('.filter-options');
 
 let backgroundHeader = 'https://images.unsplash.com/photo-1493673272479-a20888bcee10'
 
 // Fetch
 async function getData() {
-
   try {
     const response = await fetch(URL);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -34,7 +34,6 @@ async function getData() {
 
 // Render image
 async function renderImage(obj) {
-  // Clear before
   while (imgContainer.firstChild) {
     imgContainer.removeChild(imgContainer.firstChild);
   }
@@ -47,32 +46,44 @@ async function renderImage(obj) {
     imgContainer.appendChild(img);
   });
 }
-/*
+/**
  * Definir origen de imagenes
  */
 document.addEventListener('DOMContentLoaded', function () {
-  filter_pixabay.addEventListener('click', (e) => {
-    activeFilter(filter_pixabay);
-  });
-  filter_unspash.addEventListener('click', (e) => {
-    activeFilter(filter_unspash);
+  filter_container.forEach(filter => {
+    filter.addEventListener('click', () => {
+
+      const isChecked = filter.querySelector('input');
+      if (isChecked) {
+        isChecked.checked = true;
+        isChecked.parentElement.classList.add('filter-active')
+        // TODO: Crar una funcioon externa para poder usarlo en el evento submit
+        if (isChecked.value === 'pixabay') {
+          URL = URL_PIXABAY + source;
+        } else {
+          URL = URL_UNSPLASH + source;
+        }
+        getData();
+      }
+
+      const noChecked = filter.nextElementSibling || filter.previousElementSibling;
+      if (noChecked) {
+        noChecked.classList.remove('filter-active');
+      }
+
+    })
   });
 });
-function activeFilter(filter) {
-  if ( filter.classList.contains('filter-active')) {
-    filter.classList.remove('filter-active');
-  } else {
-    filter.classList.add('filter-active');
-  }
-}
-// TODO: Solo puede existir un filtro activo, y activar funcionalidad de checkbox.
-/*
+
+/**
  * Eventos de carga de imagenes
- */
+*/
+
 // Load background image at start
 document.addEventListener('DOMContentLoaded', function () {
   changeBackground();
 });
+
 // Change background image
 function changeBackground(url) {
   backgroundHeader = url || backgroundHeader;
@@ -93,7 +104,7 @@ searchForm.addEventListener('submit', (e) => {
     alert('Debes escribir algo para buscar')
     return;
   }
+  // TODO: Usar la funcion externa que hemos creado en el evento submit
   URL = URL_PIXABAY + source;
   getData();
 });
-
