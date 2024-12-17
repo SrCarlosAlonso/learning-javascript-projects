@@ -1,13 +1,12 @@
 // Variables de entorno
-const AKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_AKEY;
-const SKEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_SKEY;
+const KEY_UNSPLASH = import.meta.env.VITE_UNSPLASH_KEY;
 const AKEY_PIXABAY = import.meta.env.VITE_PIXABAY_KEY
 
 // URls de API
 let source = 'yellow+flowers';
 const URL_PIXABAY = `https://pixabay.com/api/?key=${AKEY_PIXABAY}&q=`;
 // TODO: Configurar URL de unsplash
-const URL_UNSPLASH = `https://api.unsplash.com/search/photos?query=`;
+const URL_UNSPLASH = `https://api.unsplash.com/search/photos?client_id=${KEY_UNSPLASH}&query=office`;
 let URL = URL_PIXABAY + source;
 
 // DOM
@@ -19,7 +18,7 @@ const filter_container = document.querySelectorAll('.filter-options');
 let backgroundHeader = 'https://images.unsplash.com/photo-1493673272479-a20888bcee10'
 
 // Fetch
-async function getData() {
+async function getDataPixabay() {
   try {
     const response = await fetch(URL);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
@@ -30,7 +29,7 @@ async function getData() {
   } catch (error) {
     console.log(error);
   }
-} getData();
+} getDataPixabay();
 
 // Render image
 async function renderImage(obj) {
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           URL = URL_UNSPLASH + source;
         }
-        getData();
+        getDataPixabay();
       }
 
       const noChecked = filter.nextElementSibling || filter.previousElementSibling;
@@ -106,5 +105,5 @@ searchForm.addEventListener('submit', (e) => {
   }
   // TODO: Usar la funcion externa que hemos creado en el evento submit
   URL = URL_PIXABAY + source;
-  getData();
+  getDataPixabay();
 });
