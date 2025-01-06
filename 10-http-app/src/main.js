@@ -1,18 +1,55 @@
-import "./style.css";
-
 // API
 // https://rickandmortyapi.com/documentation/
 // https://breakingbadquotes.xyz/
+const nameApp = "Rick and Morty API";
+const appContainer = document.querySelector("#app");
 
-const title = "Hello Vite!";
+const appHeading = document.createElement("h1");
+appHeading.innerText = nameApp;
+appContainer.appendChild(appHeading);
 
-document.querySelector("#app").innerHTML = `
-  <div>
-    <h1 id="app-title"> ${title} </h1>
-    <div class="card">
-    </div>
-  </div>
+const urlCharacters = "https://rickandmortyapi.com/api/character";
 
-`;
+const getCharacters = async () => {
+  try {
+    const response = await fetch(urlCharacters);
+    const data = await response.json();
+    const characters = data.results;
+    const pagination = data.info;
 
-setupCounter(document.querySelector("#counter"));
+    printPagination(pagination);
+
+    characters.forEach(character => {
+      printCard(character);
+    })
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
+
+getCharacters();
+
+const printCard = (objCharacter) => {
+  const { name, image } = objCharacter;
+
+  const card = document.createElement("div")
+  card.classList.add("card");
+
+  const img = document.createElement("img");
+  img.src = image;
+  img.alt = name;
+  card.appendChild(img);
+
+  const nameCard = document.createElement("h2");
+  nameCard.innerText = name;
+  card.appendChild(nameCard);
+
+  appContainer.appendChild(card);
+}
+
+const printPagination = (info) => {
+  const { pages, next, prev } = info;
+  next === null ? console.log() : console.log(next);
+  prev === null ? console.log() : console.log(prev);
+}
