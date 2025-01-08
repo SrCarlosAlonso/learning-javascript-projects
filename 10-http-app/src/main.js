@@ -3,10 +3,12 @@
 // https://breakingbadquotes.xyz/
 const nameApp = "Rick and Morty API";
 const appContainer = document.querySelector("#app");
+const appHeading = document.querySelector("header");
+const appTitle = document.createElement("h1");
+const charactersWrapper = document.querySelector(".wrapper");
 
-const appHeading = document.createElement("h1");
-appHeading.innerText = nameApp;
-appContainer.appendChild(appHeading);
+appTitle.innerText = nameApp;
+appHeading.appendChild(appTitle);
 
 const urlCharacters = "https://rickandmortyapi.com/api/character";
 
@@ -45,7 +47,7 @@ const printCard = (objCharacter) => {
   nameCard.innerText = name;
   card.appendChild(nameCard);
 
-  appContainer.appendChild(card);
+  charactersWrapper.appendChild(card);
 }
 
 const printPagination = (info) => {
