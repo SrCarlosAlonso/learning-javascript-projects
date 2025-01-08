@@ -6,6 +6,7 @@ const appContainer = document.querySelector("#app");
 const appHeading = document.querySelector("header");
 const appTitle = document.createElement("h1");
 const charactersWrapper = document.querySelector(".wrapper");
+const appFooter = document.querySelector("footer");
 
 appTitle.innerText = nameApp;
 appHeading.appendChild(appTitle);
@@ -13,6 +14,7 @@ appHeading.appendChild(appTitle);
 const urlCharacters = "https://rickandmortyapi.com/api/character";
 
 const getCharacters = async () => {
+
   try {
     const response = await fetch(urlCharacters);
     const data = await response.json();
@@ -52,6 +54,12 @@ const printCard = (objCharacter) => {
 
 const printPagination = (info) => {
   const { pages, next, prev } = info;
-  next === null ? console.log() : console.log(next);
-  prev === null ? console.log() : console.log(prev);
+}
+
+
+//Helpes functions
+const deleteChildren = (parent) => {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
 }
